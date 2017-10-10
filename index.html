@@ -114,29 +114,27 @@
 
             <p class="red-text">Some description of the conference</p>
             <p>Further information about the conference.</p>
-	    <p>
-	    Hello <span id="demo">World!</span> <br />
-	    Num1: <input type="text" id="num1"> <br /></input>
-	    Num2: <input type="text" id="num2"> <br /></input>
-	    Tax Rate: <input type="text" id="taxr"> <br /></input>
-	    <hr />
-	    Subtotal: <span id="subtotal"></span><br />
-	    Tax: <span id="tax"></span> <br />
-	    Total: <span id=total><br /></span>
+	    <p class="text-left">
+		Num1: <input type="text" id="num1"></input>
+		Num2: <input type="text" id="num2"></input>
+		Tax Rate: <input type="text" id="taxr"></input>
+	    </p>
+	    <div class="center-block text-left">
+		Subtotal: <span id="subtotal"></span><br />
+		Tax: <span id="tax"></span> <br />
+		Total: <span id=total><br /></span>
+	    </div>
 	    <script>
 		function TotalNums() {
-			var num1 = document.getElementById("num1").value || 0;
-			var num2 = document.getElementById("num2").value || 0;
-			var subtotal = Math.round((parseFloat(num1) + parseFloat(num2))* 100) 
-				/ 100;
-			document.getElementById("subtotal").innerHTML= '$' + subtotal || '$' + 
-				0;
+			var num1 = parseFloat(document.getElementById("num1").value) || 0;
+			var num2 = parseFloat(document.getElementById("num2").value) || 0;
+			var subtotal = num1 + num2;
 			var taxrate = parseFloat(document.getElementById("taxr").value) || 0;
-			var tax = Math.round((parseFloat(taxrate) * parseFloat(subtotal))*100) 
-				/ 100 || 0;
-			document.getElementById('tax') = '$' + tax || '$' + 0;
-			document.getElementById('total').innerHTML = '$' + (parseFloat(tax) + 
-					parseFloat(subtotal));
+			var tax = subtotal * taxrate || 0;
+			var total = tax + subtotal || 0;
+			document.getElementById("subtotal").innerHTML= '$' + (Math.round(subtotal * 100) / 100) || '$' + 0;
+			document.getElementById('tax').innerHTML = '$' + (Math.round(tax * 100) / 100) || '$' + 0;
+			document.getElementById('total').innerHTML = '$' + (Math.round(total * 100) / 100) || '$' + 0;
 		}
 		TotalNums();
 		document.getElementById('num1').addEventListener("keyup", function (evt) {
@@ -149,8 +147,6 @@
 			TotalNums();
 		}, false);
 	    </script>
-	    </P>
-
         </section>
         <!--Section: About-->
 
